@@ -1,26 +1,15 @@
+var scraping = require("./controllers/scrapingController")
+var tools = require("./controllers/toolsController")
+var database = require("./controllers/databaseController")
+var automate = require("./controllers/automateController")
+
 console.log('--------------------------------')
 console.log('-')
 console.log('-Start')
-console.log('-')
-console.log('--------------------------------')
 
-var fs = require('fs')
-
-const url = 'https://mobile.facebook.com/Leonidas01/photos/a.121169999326741/619435976166805'
-
-var scraping = require("./controllers/scrapingController")
-
-async function main() {
-    scraping.getProfile('https://mobile.facebook.com/dreank.mm')
-        .then((a) => {
-
-            fs.writeFile('test.html', a, function (err) {
-                if (err) throw err
-                console.log('-test.html')
-            })
-            console.log(a)
-        }).catch((err) => {
-            console.log(err)
-        })
-}
-main()
+database.db_connect()
+    .then(async () => {
+        console.log('-db_connect')
+        ///automate.searchProfiles(3)
+        console.log(await scraping.getPhoto('https://mobile.facebook.com/photo.php?fbid=10216825109380256'))
+    })

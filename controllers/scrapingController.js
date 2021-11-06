@@ -19,29 +19,26 @@ const getPhoto = (url) => {
             .then(function (response) {
                 try {
                     const $ = cheerio.load(response.data)
-                    for (let i = 0; i < 1; i++) {
-                        //console.log($('').html())
-                        var a = $.html($('.img')[1])
-                        a = a.toString(true)
-                        a = a.split('src="')[1]
-                        a = a.split('"')[0]
-                        a = a.replaceAll('&amp;', '&')
-                        resolve(a)
-                    }
+                    var a = $.html($('body'))
+                    //a = a.toString(true)
+                    /*
+                    a = a.split('src="')[1]
+                    a = a.split('"')[0]
+                    a = a.replaceAll('&amp;', '&')
+                    */
+                    resolve(a)
                 } catch (error) {
-                    console.log(error)
                     reject(error)
                 }
             })
             .catch(function (err) {
-                console.log(err)
                 reject(err)
             })
     })
 }
 
 
-const getProfile = (url) => {
+const checkProfile = (url) => {
     return new Promise((resolve, reject) => {
         axios({
             method: 'get',
@@ -49,32 +46,25 @@ const getProfile = (url) => {
             headers: {}
         })
             .then(function (response) {
-                if (response.status != 200) reject(response.status)
                 try {
-                    const $ = cheerio.load(response.data)
-                    for (let i = 0; i < 1; i++) {
-                        //console.log($('').html())
-                        var a = $.html($('._6x2x')[1])
-                        //a = a.toString(true)
-                        //a = a.split('src="')[1]
-                        //a = a.split('"')[0]
-                        //a = a.replaceAll('&amp;', '&')
-                        resolve(a)
-                    }
+                    resolve(response.status)
                 } catch (error) {
-                    console.log(error)
                     reject(error)
                 }
             })
             .catch(function (err) {
-                console.log(err)
-                reject(err)
+                try {
+                    if (err.response.status === 404) resolve(404)
+                    else reject(err)
+                } catch (error) {
+                    reject(error)
+                }
             })
     })
 }
 
 
 module.exports = {
-    getPhoto: getPhoto,
-    getProfile: getProfile
+    getPhoto,
+    checkProfile
 }
