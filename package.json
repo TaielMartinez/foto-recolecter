@@ -1,0 +1,32 @@
+{
+  "name": "foto-recolecter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TaielMartinez/foto-recolecter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TaielMartinez/foto-recolecter/issues"
+  },
+  "homepage": "https://github.com/TaielMartinez/foto-recolecter#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0",
+    "mysql": "^2.18.1",
+    "node-fetch": "^3.0.0",
+    "nodemon": "^2.0.14",
+    "puppeteer": "^11.0.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "sqlite3": "^5.0.2"
+  }
+}
